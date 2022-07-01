@@ -161,3 +161,38 @@ def admin():
     else:
         comidas = db.execute("SELECT nombre, descripcion, precio, precio_decuento, Descuento FROM comida")
         return render_template("admin.html", comidas=comidas)
+
+@app.route("/administrador", methods=["GET", "POST"])
+@login_required
+def administrador():
+    if(request.method == "POST"):
+        id = request.form.get('id')
+        nombre = request.form.get('nombre')
+        descripcion = request.form.get('descripcion')
+        precio = request.form.get('precio')
+        descuento = request.form.get('descuento')
+        p_descuento = request.form.get('p_descuento')
+        if len(id) != 1 :
+            return apology('El Platillo, no existe', 400)
+        else:
+            db.execute("UPDATE comida SET nombre = ?, descripcion = ?, precio = ?, precio_decuento = ?, Descuento = ? WHERE id = ?", nombre, descripcion, precio, descuento, p_descuento, id)
+            return redirect('/landing')
+    else:
+        comidas = db.execute("SELECT id, nombre, descripcion, precio, precio_decuento, Descuento FROM comida")
+        return render_template("administrador.html", comidas=comidas)
+
+
+@app.route("/eliminar", methods=["GET", "POST"])
+@login_required
+def eliminar():
+    if(request.method == "POST"):
+        id = request.form.get('id')
+        if len(id) != 1:
+            return apology('El Platillo, no existe', 400)
+        else:
+            db.execute("DELETE FROM comida WHERE id = ?;", id)
+            return redirect('/landing')
+    else:
+        comidas = db.execute(
+            "SELECT id, nombre, descripcion, precio, precio_decuento, Descuento FROM comida")
+        return render_template("eliminar.html", comidas=comidas)
