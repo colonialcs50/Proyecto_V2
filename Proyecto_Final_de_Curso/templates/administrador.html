@@ -70,6 +70,10 @@
         <td> {{ comidas["precio"] }}</td>
         <td> {{ comidas["precio_decuento"] }}</td>
         <td> {{ comidas["Descuento"] }}</td>
+        <form action="/administrador" method="post">
+            <input name="id" type="hidden" value="{{<!--Aqui    va la funcionalidad del boton eliminar-->}}">
+            <input type="submit" class="form_submit" value="Eliminar">
+        </form>
     </tr>
     {% endfor %}
 </table>
