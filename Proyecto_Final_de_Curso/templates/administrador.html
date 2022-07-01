@@ -1,31 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Administracion{% endblock %}
-{% block css %} "/static/css/modificar.css"{% endblock %}
+{% block title %}Admin{% endblock %}
+{% block css %} "/static/css/admint.css"{% endblock %}
 {% block body %}
-<!--Inicio de la seccion del header-->
-<section class="header">
-    <a href="#" class="logo"><i class="fas fa-utensils"></i>Colonial</a>   
-    <a class="estilo_nombre"> {{ usuario }}</a>     
-    <nav class="navbar">
-        <a href="/landing.html">Home</a>
-        <a href="#modificar">Modificar</a>
-        {% if admin == 'admin' %}
-        <a href="/admin"> {{ admin }} </a>
-        {% else %}
-        {% endif %}
-        <a href="#menu">Menu</a>
-        {% if session["user_id"] %}
-        <a href="/logout" class="btn">Log Out</a>
-        {% else %}
-        <a href="/login" class="btn">Login</a>
-        {% endif %}
-    </nav>
-    <div id="menu-btn" class="fas fa-bars"></div>
-</section>
-<!--FIn de la seccion del header-->
-
 <form class="form" action="/admin" method="post">
-    <h2 class="form_title">Menu</h2>
+    <h2 class="form_title">Administracion</h2>
+    <div>
+        <a href="/landing"class="estilos">Inicio</a>
+        <a  href="/admin" class="estilos">Ingresar Platillo</a>
+    </div>
 
     <div class="form_container">
         <div class="form_group">
@@ -58,7 +40,6 @@
             <input type="checkbox" id="p_descuento" name="p_descuento"
                 class="checkbox-JASoft">
         </div>
-        <input type="submit" class="form_submit" value="Aplicar">
         <input type="submit" class="form_submit" value="Modificar">
         <input type="submit" class="form_submit" value="Eliminar">
         <p clas="warning" id="warning"></p>
@@ -68,7 +49,7 @@
 
 <table class="normal" summary="Tabla genérica" width="100px" height="100px">
     <tr>
-        <th scope="col" class="normal th">Id</th>
+        <th scope="col" class="normal th">ID</th>
         <th scope="col" class="normal th">Nombre</th>
         <th scope="col" class="normal th">Descripcion</th>
         <th scope="col" class="normal th">Precio</th>
@@ -77,7 +58,7 @@
     </tr>
     {% for comidas in comidas %}
     <tr>
-        <td> {{ comidas["id"].upper() }}</td> 
+        <td> {{ comidas["id"].upper() }}</td>
         <td> {{ comidas["nombre"].upper() }}</td>
         <td> {{ comidas["descripcion"] }}</td>
         <td> {{ comidas["precio"] }}</td>
@@ -86,6 +67,4 @@
     </tr>
     {% endfor %}
 </table>
-<!--Fin de la seccion del header-->
-
 {% endblock %}
